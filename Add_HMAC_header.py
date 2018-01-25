@@ -2,7 +2,6 @@
 ### Custom extender to add headers to requests  ###
 ### Add it to a session handling rule to use    ###
 ### Tested in BurpSuitePro 1.7.30  jhyton 2.7.0 ### 
-### Made by f-viktor                            ###
 ###################################################
 
 from burp import IBurpExtender
