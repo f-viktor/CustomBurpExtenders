@@ -3,14 +3,14 @@
 package main
 
 import (
-    "bufio"
-    "fmt"
-    "os"
-		"net/http"
-		"bytes"
-		"crypto/tls"
-		"io/ioutil"
-		"strings"
+	"bufio"
+        "fmt"
+	"os"
+	"net/http"
+	"bytes"
+	"crypto/tls"
+	"io/ioutil"
+	"strings"
 )
 
 const parallelism=10
@@ -26,10 +26,10 @@ func main(){
   for {
     //do one batch of requests
   	 for i := 1; i < parallelism; i++ {
-       if scanner.Scan() == true {
-  	  	  line :=scanner.Text()
-          go dorequest(line)
-       } else {return}
+	       if scanner.Scan() == true {
+		  line :=scanner.Text()
+		  go dorequest(line)
+	       } else {return}
   	 }
 
      //wait for a response before starting next batch
@@ -43,8 +43,8 @@ func main(){
 // manage responses here
 func checkResponse(resp string, username string) {
     if strings.Contains(resp,"successful login"){
-  		fmt.Println(resp + "  " + username)
-  	}
+  	fmt.Println(resp + "  " + username)
+    }
 }
 
 // does post request, set request headers and parameters here
@@ -63,14 +63,14 @@ func dorequest(username string){
 	req.Header.Add("Authorization", "Basic ThisIsSupposedToBeAPaidFeature==")
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	resp, err := client.Do(req)
-  if err != nil {
-      //fmt.Println(err)
-      return
-  }
+	if err != nil {
+	      //fmt.Println(err)
+	      return
+	}
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 
 	body := string(bodyBytes)
-  checkResponse(body, username)
+  	checkResponse(body, username)
 
 	defer resp.Body.Close()
 }
